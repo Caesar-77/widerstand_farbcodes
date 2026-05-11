@@ -1,1 +1,131 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Widerstands-Farbcodes</title>
 
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 40px;
+      background: #f2f2f2;
+    }
+
+    .resistor {
+      width: 320px;
+      height: 90px;
+      background: beige;
+      margin: 30px auto;
+      border-radius: 50px;
+      position: relative;
+      border: 3px solid #999;
+    }
+
+    .ring {
+      width: 22px;
+      height: 90px;
+      position: absolute;
+      top: 0;
+    }
+
+    #ring1 {
+      left: 70px;
+      background: brown;
+    }
+
+    #ring2 {
+      left: 130px;
+      background: black;
+    }
+
+    #ring3 {
+      left: 190px;
+      background: red;
+    }
+
+    select {
+      padding: 8px;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      color: darkblue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Widerstandsrechner</h1>
+
+  <div class="resistor">
+    <div id="ring1" class="ring"></div>
+    <div id="ring2" class="ring"></div>
+    <div id="ring3" class="ring"></div>
+  </div>
+
+  <div>
+    <select id="farbe1">
+      <option value="0">Schwarz</option>
+      <option value="1">Braun</option>
+      <option value="2">Rot</option>
+      <option value="3">Orange</option>
+      <option value="4">Gelb</option>
+    </select>
+
+    <select id="farbe2">
+      <option value="0">Schwarz</option>
+      <option value="1">Braun</option>
+      <option value="2">Rot</option>
+      <option value="3">Orange</option>
+      <option value="4">Gelb</option>
+    </select>
+
+    <select id="multiplikator">
+      <option value="1">x1</option>
+      <option value="10">x10</option>
+      <option value="100">x100</option>
+      <option value="1000">x1000</option>
+    </select>
+  </div>
+
+  <h2 id="ergebnis">100 Ω</h2>
+
+  <script>
+
+    const farben = [
+      "black",
+      "brown",
+      "red",
+      "orange",
+      "yellow"
+    ];
+
+    function berechnen() {
+
+      const f1 = parseInt(document.getElementById("farbe1").value);
+      const f2 = parseInt(document.getElementById("farbe2").value);
+      const mult = parseInt(document.getElementById("multiplikator").value);
+
+      document.getElementById("ring1").style.background = farben[f1];
+      document.getElementById("ring2").style.background = farben[f2];
+
+      const wert = ((f1 * 10) + f2) * mult;
+
+      document.getElementById("ergebnis").innerText =
+        wert + " Ω";
+    }
+
+    document.querySelectorAll("select").forEach(el => {
+      el.addEventListener("change", berechnen);
+    });
+
+    berechnen();
+
+  </script>
+
+</body>
+</html>
